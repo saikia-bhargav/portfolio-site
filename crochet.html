@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crochet Gallery</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+    :root {
+      --bg: #f6f6f9;
+      --card-bg: #fff;
+      --overlay: rgba(0, 0, 0, 0.35);
+      --accent: #ecb7b7;
+      --accent-light: #ffe3e3;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, var(--bg), var(--accent-light));
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 0.5px;
+      margin: 0;
+      background: linear-gradient(135deg, #e66465, #9198e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+      font-family: cursive;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem;
+      padding: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      background-color: var(--card-bg);
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      filter: brightness(0.95);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      opacity: 0;
+      transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+      padding: 1rem;
+    }
+
+    .gallery-item:hover .overlay,
+    .gallery-item:active .overlay {
+      opacity: 1;
+      backdrop-filter: blur(4px);
+    }
+
+    .overlay span {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0 2rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+      }
+      .overlay span {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+      }
+      .overlay span {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TENDER LOOPS</h1>
+  </header>
+
+  <main class="gallery" id="gallery"></main>
+
+  <footer>© 2025 Crochet Collection. All rights reserved.</footer>
+
+  <script>
+    const imageNames = [
+      "crochet1.jpg",
+      "crochet2.jpg",
+      "crochet3.jpg",
+      "crochet4.jpg",
+      "crochet5.jpg",
+      "crochet6.jpg",
+      "crochet7.jpg"
+    ];
+
+    const gallery = document.getElementById("gallery");
+    imageNames.forEach(name => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+      const label = name.split(".")[0].replace(/[_-]/g, " ");
+      item.innerHTML = `
+        <img src="images/crochet/${name}" alt="${label}" />
+        <div class="overlay"></div>
+      `;
+      gallery.appendChild(item);
+    });
+  </script>
+</body>
+</html>
